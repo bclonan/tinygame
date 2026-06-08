@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A 60-second browser game about trying to ship one tiny software task before architecture wins." />
+    <meta name="theme-color" content="#c7ff4f" />
+    <link rel="canonical" href="https://ship-the-ugly-button.netlify.app/" />
+    <meta property="og:site_name" content="Ship the Ugly Button" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ship-the-ugly-button.netlify.app/" />
+    <meta property="og:title" content="Ship the Ugly Button" />
+    <meta property="og:description" content="A 60-second browser game about trying to ship one tiny software task before architecture wins." />
+    <meta property="og:image" content="https://ship-the-ugly-button.netlify.app/assets/og-image.png" />
+    <meta property="og:image:secure_url" content="https://ship-the-ugly-button.netlify.app/assets/og-image.png" />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Ship the Ugly Button game screen showing a redesigned Save button, fake files, meters, and an AI gremlin." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Ship the Ugly Button" />
+    <meta name="twitter:description" content="A 60-second browser game about trying to ship one tiny software task before architecture wins." />
+    <meta name="twitter:image" content="https://ship-the-ugly-button.netlify.app/assets/og-image.png" />
+    <meta name="twitter:image:alt" content="Ship the Ugly Button game screen showing a redesigned Save button, fake files, meters, and an AI gremlin." />
+    <title>Ship the Ugly Button</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="game-shell" aria-label="Ship the Ugly Button">
+      <section class="ticket-strip" aria-label="Current ticket">
+        <div id="ticketId" class="ticket-id">JIRA-TINY-404</div>
+        <div class="ticket-copy">
+          <span class="ticket-label">TASK</span>
+          <strong id="ticketTask">Add a button that says "Save"</strong>
+          <div id="ticketMeta" class="ticket-meta"></div>
+        </div>
+        <div class="timer-wrap" aria-label="Time remaining">
+          <span>TIME REMAINING</span>
+          <strong id="timeValue">60.0s</strong>
+          <div class="timer-track"><div id="timerFill" class="timer-fill"></div></div>
+        </div>
+      </section>
+
+      <section class="game-grid">
+        <section class="workspace" aria-label="Work area">
+          <div class="product-window">
+            <div class="window-bar">
+              <span></span>
+              <span></span>
+              <span></span>
+              <strong id="windowTitle">settings-panel.local</strong>
+            </div>
+            <div class="product-body">
+              <div class="form-card">
+                <label id="fakeTitleLabel" for="fakeTitle">Project title</label>
+                <input id="fakeTitle" type="text" value="Quarterly report" readonly />
+                <div id="buttonSlot" class="button-slot">
+                  <button id="uglyButton" class="ugly-button" type="button">Save</button>
+                </div>
+                <p id="previewCaption" class="preview-caption">The user is waiting for one button.</p>
+              </div>
+              <div id="complexityWeb" class="complexity-web" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="meters" aria-label="Project meters">
+            <div class="meter-card">
+              <span>Progress</span>
+              <strong id="progressValue">0%</strong>
+              <div class="meter-track"><div id="progressFill" class="meter-fill progress-fill"></div></div>
+            </div>
+            <div class="meter-card">
+              <span>Complexity</span>
+              <strong id="complexityValue">0%</strong>
+              <div class="meter-track"><div id="complexityFill" class="meter-fill complexity-fill"></div></div>
+            </div>
+            <div class="meter-card">
+              <span>Confidence</span>
+              <strong id="confidenceValue">60%</strong>
+              <div class="meter-track"><div id="confidenceFill" class="meter-fill confidence-fill"></div></div>
+            </div>
+          </div>
+
+          <div class="status-strip" aria-label="Session status">
+            <div>
+              <span>Ticket</span>
+              <strong id="roundValue">1</strong>
+            </div>
+            <div>
+              <span>Shipped</span>
+              <strong id="shippedValue">0</strong>
+            </div>
+            <div>
+              <span>Temptation</span>
+              <strong id="temptationValue">None yet</strong>
+            </div>
+          </div>
+
+          <div class="controls" aria-label="Actions">
+            <button class="action-button" type="button" data-action="code">
+              <span>CODE</span>
+              <small>make the thing</small>
+            </button>
+            <button class="action-button" type="button" data-action="refactor">
+              <span>REFACTOR</span>
+              <small>rename the thing</small>
+            </button>
+            <button class="action-button" type="button" data-action="research">
+              <span>RESEARCH</span>
+              <small>read about the thing</small>
+            </button>
+            <button id="abstractButton" class="action-button" type="button" data-action="abstract">
+              <span>ABSTRACT</span>
+              <small>generalize the thing</small>
+            </button>
+            <button class="action-button" type="button" data-action="redesign">
+              <span>REDESIGN</span>
+              <small>style the thing</small>
+            </button>
+            <button class="action-button ship-button" type="button" data-action="ship">
+              <span>SHIP</span>
+              <small>stop touching it</small>
+            </button>
+          </div>
+        </section>
+
+        <aside class="side-panel" aria-label="Project state">
+          <section class="gremlin-panel" aria-live="polite">
+            <div class="gremlin-art">
+              <img src="./assets/gremlin.svg" alt="Tiny AI gremlin" />
+              <span id="gremlinMood" class="mood-light"></span>
+            </div>
+            <blockquote id="gremlinLine">"This is easy. Do not make it weird."</blockquote>
+          </section>
+
+          <section class="file-panel">
+            <div class="panel-heading">
+              <span>Fake files</span>
+              <strong id="fileCount">1</strong>
+            </div>
+            <ul id="fileList" class="file-list"></ul>
+          </section>
+
+          <section class="log-panel">
+            <div class="panel-heading">
+              <span>Commit-ish log</span>
+            </div>
+            <ol id="eventLog" class="event-log"></ol>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <div id="modalLayer" class="modal-layer" aria-hidden="true">
+      <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-topline">
+          <strong id="modalTitle">Research spiral</strong>
+          <button id="modalClose" class="icon-button" type="button" aria-label="Close">X</button>
+        </div>
+        <div id="modalBody" class="modal-body"></div>
+      </section>
+    </div>
+
+    <div id="endingLayer" class="ending-layer" aria-hidden="true">
+      <section class="ending-card" role="dialog" aria-modal="true" aria-labelledby="endingTitle">
+        <span id="endingKicker" class="ending-kicker">ENDING</span>
+        <h1 id="endingTitle">UGLY BUT REAL</h1>
+        <p id="endingText"></p>
+        <p id="endingTicket" class="ending-ticket"></p>
+        <dl class="ending-stats">
+          <div>
+            <dt>Progress</dt>
+            <dd id="endingProgress">0%</dd>
+          </div>
+          <div>
+            <dt>Complexity</dt>
+            <dd id="endingComplexity">0%</dd>
+          </div>
+          <div>
+            <dt>Confidence</dt>
+            <dd id="endingConfidence">0%</dd>
+          </div>
+        </dl>
+        <button id="restartButton" class="restart-button" type="button">PLAY AGAIN</button>
+      </section>
+    </div>
+
+    <script src="./game.js" defer></script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"261208e75a7149eeb3cadc1c35be235b"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+  </body>
+</html>
